@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net"
 	"os"
 	"strconv"
@@ -34,7 +35,7 @@ func main() {
 	arr := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		n, err := conn.Read(buf)
-		if err != nil {
+		if err != nil && err != io.EOF {
 			panic(err)
 		}
 		arr[i] = string(buf[:n])
